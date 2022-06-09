@@ -1,8 +1,15 @@
-const QuestionCard = ({ title, detail }) => {
+import { Link } from "react-router-dom";
+
+const QuestionCard = ({ title, detail, id }) => {
   return (
-    <div>
-      <h5>{title}</h5>
-      <p>{detail}</p>
+    <div className="card">
+      <h5 className="card__title">{title}</h5>
+      <p className="card__detail">{detail}</p>
+      <div className="card__action">
+        <Link className="btn btn-primary" to={`/question/${id}/edit`}>
+          Edit
+        </Link>
+      </div>
     </div>
   );
 };
