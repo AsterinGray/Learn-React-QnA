@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import QuestionCard from "../components/QuestionCard";
 import SearchBar from "../components/SearchBar";
 
-const QuestionListPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+const QuestionListPage = ({ searchQuery }) => {
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
@@ -14,6 +14,10 @@ const QuestionListPage = () => {
     };
     fetchQuestions();
   }, []);
+
+  useEffect(() => {
+    console.log(searchQuery);
+  }, [searchQuery]);
 
   const renderQuestionList = () => {
     let questionList = questions;
@@ -30,10 +34,16 @@ const QuestionListPage = () => {
 
   return (
     <>
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <SearchBar />
       <div className="list">{renderQuestionList()}</div>
     </>
   );
 };
 
-export default QuestionListPage;
+const mapStateToProps = (state) => {
+  return {
+    searchQuery: state.search.searchQuery,
+  };
+};
+
+export default connect(mapStateToProps)(QuestionListPage);

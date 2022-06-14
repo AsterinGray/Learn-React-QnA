@@ -1,3 +1,5 @@
+import { setSearchQuery } from "../store/actions/question-action";
+import { connect } from "react-redux";
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   return (
     <div className="search-bar">
@@ -11,4 +13,20 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
   );
 };
 
-export default SearchBar;
+// Dari CS kasih data
+// Menghubungkan state dari global/store ke komponen kita
+// melaluai props komponen
+const mapStateToProps = (state) => {
+  return {
+    searchQuery: state.search.searchQuery,
+  };
+};
+
+// Function yang menghubungkan CS dengan kita
+// Menghubungkan komponen kita dengan action creator/ form
+// dengan komponen kita melalui props
+const mapDispatchToProps = {
+  setSearchQuery,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
