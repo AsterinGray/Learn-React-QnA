@@ -1,4 +1,4 @@
-import { setSearchQuery } from "../store/actions/question-action";
+import { setSearchQuery } from "../store/actions/search-action";
 import { connect } from "react-redux";
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   return (

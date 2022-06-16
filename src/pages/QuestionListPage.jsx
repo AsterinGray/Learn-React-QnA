@@ -3,16 +3,11 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import QuestionCard from "../components/QuestionCard";
 import SearchBar from "../components/SearchBar";
+import { getQuestions } from "../store/actions/question-action";
 
-const QuestionListPage = ({ searchQuery }) => {
-  const [questions, setQuestions] = useState([]);
-
+const QuestionListPage = ({ searchQuery, questions, getQuestions }) => {
   useEffect(() => {
-    const fetchQuestions = async () => {
-      const res = await axios.get("http://localhost:4000/questions");
-      setQuestions(res.data);
-    };
-    fetchQuestions();
+    getQuestions();
   }, []);
 
   useEffect(() => {
@@ -43,7 +38,12 @@ const QuestionListPage = ({ searchQuery }) => {
 const mapStateToProps = (state) => {
   return {
     searchQuery: state.search.searchQuery,
+    questions: state.question.questions,
   };
 };
 
-export default connect(mapStateToProps)(QuestionListPage);
+const mapDispatchToProps = {
+  getQuestions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionListPage);

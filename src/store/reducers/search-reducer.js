@@ -1,3 +1,5 @@
+import { SET_QUERY } from "../constants/search-constant";
+
 const defaultState = {
   searchQuery: "",
   searchHistory: [],
@@ -5,7 +7,7 @@ const defaultState = {
 
 const searchReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case "set_query":
+    case SET_QUERY:
       return { ...state, searchQuery: action.payload };
     default:
       return state;
